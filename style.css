@@ -1,0 +1,501 @@
+```css
+/* =========================
+   MAIN
+========================= */
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    font-family: sans-serif;
+
+    background-image: url('background.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   FLOWERS
+========================= */
+
+#flowerCanvas {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 9999;
+}
+
+
+/* =========================
+   FONT
+========================= */
+
+@font-face {
+    font-family: 'Lobster';
+
+    src: url('Lobster-Regular.ttf') format('truetype');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* =========================
+   FRAME
+========================= */
+
+.frame-photo-album {
+    position: absolute;
+
+    top: 60%;
+    left: 0;
+
+    width: 50%;
+    height: 50%;
+
+    background-image: url('frame.png');
+
+    background-position: center;
+    background-repeat: no-repeat;
+
+    pointer-events: none;
+
+    transition: all .2s ease-in-out;
+
+    z-index: 9999;
+}
+
+
+/* =========================
+   PHOTO ALBUM
+========================= */
+
+.photo-album {
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+
+    width: 85%;
+    height: 85%;
+
+    padding: 25px;
+
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    background-image: url('album-photo-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    background-color: transparent;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+/* Photo album scrolling area */
+
+.photo-album-inner {
+    position: absolute;
+
+    top: 70px;
+    left: 5%;
+
+    width: 90%;
+    height: 72%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    transform: rotate(5deg);
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    scrollbar-width: none;
+}
+
+.photo-album-inner::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Photo structure */
+
+.photo-album-inner-structure {
+    width: 100%;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   PHOTO CARDS
+========================= */
+
+.card {
+    margin: 0 1rem 1rem 0;
+
+    display: inline-block;
+
+    width: 44%;
+
+    padding: 8px;
+
+    background-color: white;
+
+    border: solid 2px black;
+
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+
+    border-radius: 5px;
+
+    transition: all 0.25s ease-in-out;
+
+    box-sizing: border-box;
+
+    break-inside: avoid;
+
+    vertical-align: top;
+}
+
+
+/* Card hover */
+
+.card:hover {
+    border-color: blue;
+}
+
+
+/* Image */
+
+.card img {
+    width: 100%;
+    height: 100px;
+
+    object-fit: cover;
+
+    filter: grayscale(100%);
+
+    border-radius: 5px;
+
+    transition: all 0.25s ease-in-out;
+
+    display: block;
+}
+
+
+.card:hover img {
+    filter: grayscale(0);
+}
+
+
+/* Caption */
+
+.card p {
+    margin: 5px 0;
+
+    padding: 0;
+
+    text-align: center;
+
+    font-style: italic;
+
+    font-size: 0.75rem;
+
+    color: black;
+}
+
+
+.card:hover p {
+    color: blue;
+}
+
+
+/* =========================
+   BOOK
+========================= */
+
+.book {
+    position: relative;
+
+    width: 350px;
+    height: 500px;
+
+    transition: transform 0.5s;
+}
+
+
+/* =========================
+   PAPER BACKGROUND
+========================= */
+
+.paper-background {
+    position: absolute;
+
+    top: 20px;
+    left: 15px;
+
+    width: 90%;
+    height: 90%;
+
+    background-image: url('letter.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* =========================
+   PAPER
+========================= */
+
+.paper {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    top: 0;
+    left: 0;
+
+    perspective: 1500px;
+}
+
+
+/* =========================
+   FRONT + BACK
+========================= */
+
+.front,
+.back {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 90%;
+    height: 90%;
+
+    background-image: url('cover.jpg');
+
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 10px solid #425593;
+
+    border-radius: 10px;
+
+    transform-origin: left;
+
+    transition: transform 0.5s;
+}
+
+
+.front {
+    z-index: 1;
+
+    backface-visibility: hidden;
+
+    border-left: 3px solid powderblue;
+}
+
+
+.back {
+    z-index: 0;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.front-content,
+.back-content {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.text {
+    position: absolute;
+
+    font-family: 'Lobster';
+
+    color: blue;
+}
+
+
+/* Letter text */
+
+.text-p1 {
+    top: 25%;
+    left: 10%;
+
+    width: 80%;
+
+    color: darkblue;
+
+    font-size: 18px;
+
+    line-height: 1.35;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.basic-title {
+    border-radius: 10%;
+
+    font-size: 25px;
+
+    background-color: white;
+}
+
+
+.title {
+    top: 0;
+    left: 0;
+
+    text-align: left;
+}
+
+
+.end {
+    bottom: 0;
+    right: 0;
+
+    text-align: right;
+}
+
+
+/* =========================
+   BACK CONTENT
+========================= */
+
+.back-content {
+    transform: rotateY(180deg);
+}
+
+
+/* =========================
+   FLIP
+========================= */
+
+.flipped .front,
+.flipped .back {
+    transform: rotateY(-180deg);
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+    width: 100px;
+    height: 50px;
+
+    border: 3px dotted white;
+
+    border-radius: 10%;
+
+    background-color: #425593;
+
+    color: white;
+
+    cursor: pointer;
+
+    margin: 10px;
+
+    transition: all 0.5s;
+}
+
+
+#prev-btn {
+    position: absolute;
+
+    top: 47%;
+    left: 35%;
+
+    opacity: 0;
+
+    z-index: 10000;
+}
+
+
+#next-btn {
+    position: absolute;
+
+    bottom: 40%;
+    right: 35%;
+
+    z-index: 10000;
+}
+
+
+/* =========================
+   PAPER STACK
+========================= */
+
+#p1 {
+    z-index: 3;
+}
+
+#p2 {
+    z-index: 2;
+}
+
+#p3 {
+    z-index: 1;
+}
+
+```

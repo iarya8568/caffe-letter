@@ -1,0 +1,315 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Caffe Letter!</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+    <!-- ONLY MUSIC BUTTON STYLE -->
+    <style>
+        #music-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 9999;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <canvas id="flowerCanvas"></canvas>
+
+
+    <!-- ================= MUSIC ================= -->
+
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-btn" type="button" aria-label="Music" title="Play / Pause Music">
+        🎵
+    </button>
+
+
+    <!-- Previous Button -->
+
+    <button id="prev-btn" type="button" aria-label="Previous page" title="Previous page">
+    </button>
+
+
+    <!-- Book -->
+
+    <div id="book" class="book">
+
+
+        <!-- ================= PAGE 1 ================= -->
+
+        <div id="p1" class="paper">
+
+            <!-- Page 1 Front -->
+
+            <div class="front">
+
+                <div id="f1" class="front-content">
+
+                    <div class="frame-photo-album"></div>
+
+                    <div class="basic-title text title">
+                        This is a compilation of letters that I made for u &lt;3 *
+                    </div>
+
+                    <div class="basic-title text end">
+                        I hope you love this letters!<br>
+                        For: Skye
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Page 1 Back -->
+
+            <div class="back">
+
+                <div id="b1" class="back-content">
+
+                    <div class="paper-background">
+
+                        <div class="text text-p1">
+
+                            I wrote this letter for you cause I wanna remind you that you're
+                            the best girl and beautiful person. I've never met someone like u
+                            before.<br><br>
+
+                            And I wanna tell you, you're special to me and I need u more than
+                            anything else.<br><br>
+
+                            Look at the pics!
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= PAGE 2 ================= -->
+
+        <div id="p2" class="paper">
+
+            <!-- Page 2 Front - PHOTO ALBUM -->
+
+            <div class="front">
+
+                <div id="f2" class="front-content">
+
+                    <div class="paper-background"></div>
+
+
+                    <!-- PHOTO ALBUM -->
+
+                    <div class="photo-album">
+
+                        <div class="photo-album-inner">
+
+                            <div class="photo-album-inner-structure">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="basic-title text end">
+                        My girl, Skye &lt;3 *
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Page 2 Back - LETTER PART 1 -->
+
+            <div class="back">
+
+                <div id="b2" class="back-content">
+
+                    <div class="paper-background">
+
+                        <div class="text text-p1">
+
+                            I don't know if you realize how special you are to me.
+                            It's not just your smile or your beautiful eyes, but every little thing about you that makes
+                            me fall for you more and
+                            more.
+
+                            I love the way you talk, the way you laugh, and the way you make even ordinary moments feel
+                            special.
+
+                            Having you in my life is something I'll always be grateful for.
+                            You're not just my favorite girl — you're someone my heart never wants to let go of. ❤️
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= PAGE 3 ================= -->
+
+        <div id="p3" class="paper">
+
+            <!-- Page 3 Front - LETTER PART 2 -->
+
+            <div class="front">
+
+                <div id="f3" class="front-content">
+
+                    <div class="paper-background">
+
+                        <div class="text text-p1">
+
+                            Sometimes, no matter how many words I write, they still won't be enough to explain how much
+                            you mean to me.
+
+                            You became such a beautiful part of my life, and now I can't imagine my days without you.
+
+                            I just want more moments with you — more laughs, more memories, more late-night talks, and
+                            more reasons to smile
+                            together.
+
+                            If I had to choose you all over again,
+                            I'd still choose you.
+                            Every single time. ❤️
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Page 3 Back -->
+
+            <div class="back">
+
+                <div id="b3" class="back-content">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Next Button -->
+
+    <button id="next-btn" type="button" aria-label="Next page" title="Next page">
+    </button>
+
+
+
+    <!-- ================= MUSIC SCRIPT ================= -->
+
+    <script>
+
+        const music = document.getElementById("bg-music");
+        const musicBtn = document.getElementById("music-btn");
+
+        let started = false;
+
+
+        // Start music on ANY first tap/click
+        function startMusic() {
+
+            if (started) return;
+
+            music.play()
+                .then(() => {
+
+                    started = true;
+                    musicBtn.textContent = "🔊";
+
+                })
+                .catch(() => {
+                    // Browser blocked playback
+                });
+        }
+
+
+        // Desktop click
+        document.addEventListener("click", startMusic, {
+            once: true
+        });
+
+
+        // Mobile touch
+        document.addEventListener("touchstart", startMusic, {
+            once: true
+        });
+
+
+        // Music button Play / Pause
+        musicBtn.addEventListener("click", function (event) {
+
+            event.stopPropagation();
+
+            if (music.paused) {
+
+                music.play();
+                musicBtn.textContent = "🔊";
+                started = true;
+
+            } else {
+
+                music.pause();
+                musicBtn.textContent = "🎵";
+
+            }
+
+        });
+
+    </script>
+
+
+    <!-- Existing JavaScript -->
+
+    <script type="module" src="script.js"></script>
+
+</body>
+
+</html>
+```
