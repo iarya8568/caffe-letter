@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
-    <!-- ONLY MUSIC BUTTON STYLE -->
     <style>
+        /* =====================================================
+           MUSIC BUTTON
+        ===================================================== */
+
         #music-btn {
             position: fixed;
             right: 20px;
@@ -21,48 +24,203 @@
             height: 48px;
             border: none;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
             font-size: 20px;
             cursor: pointer;
             z-index: 9999;
         }
+
+
+        /* =====================================================
+           LETTER TEXT REVEAL
+        ===================================================== */
+
+        .letter-reveal {
+            opacity: 0;
+            transform: translateY(8px);
+            transition:
+                opacity 0.9s ease,
+                transform 0.9s ease;
+        }
+
+        .letter-reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           LAST PAGE HEART
+        ===================================================== */
+
+        .last-heart {
+            text-align: center;
+            font-size: 25px;
+            margin-top: 10px;
+            opacity: 0;
+            transform: scale(0.7);
+            transition: opacity 1s ease;
+        }
+
+        .last-heart.pulse {
+            opacity: 1;
+            animation: heartbeat 1.6s infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.18);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.12);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+        /* =====================================================
+           LAST PAGE I LOVE YOU
+        ===================================================== */
+
+        .love-ending {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 20px;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: 1.2s ease;
+        }
+
+        .love-ending.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           GLOWING HEARTS
+        ===================================================== */
+
+        .ending-heart {
+            position: fixed;
+            bottom: 15px;
+            pointer-events: none;
+            z-index: 9998;
+            animation: endingFloat 4s ease-out forwards;
+            text-shadow:
+                0 0 5px rgba(255, 80, 120, 0.7),
+                0 0 15px rgba(255, 80, 120, 0.5);
+        }
+
+        @keyframes endingFloat {
+
+            0% {
+                opacity: 0;
+                transform:
+                    translateY(0) scale(0.5);
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform:
+                    translateY(-65vh) scale(1.2);
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE FIX
+           Prevent bottom text from being cut
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .text-p1 {
+                max-height: 78vh;
+                overflow-y: auto;
+                padding-bottom: 25px;
+                box-sizing: border-box;
+            }
+
+        }
     </style>
 
 </head>
+
 
 <body>
 
     <canvas id="flowerCanvas"></canvas>
 
 
-    <!-- ================= MUSIC ================= -->
+    <!-- =====================================================
+         MUSIC
+    ===================================================== -->
 
     <audio id="bg-music" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
+
+
+    <!-- PAGE FLIP SOUND -->
+
+    <audio id="page-sound">
+        <source src="page-flip.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- MUSIC BUTTON -->
 
     <button id="music-btn" type="button" aria-label="Music" title="Play / Pause Music">
         🎵
     </button>
 
 
-    <!-- Previous Button -->
+    <!-- PREVIOUS BUTTON -->
 
     <button id="prev-btn" type="button" aria-label="Previous page" title="Previous page">
     </button>
 
 
-    <!-- Book -->
+
+    <!-- =====================================================
+         BOOK
+    ===================================================== -->
 
     <div id="book" class="book">
 
 
-        <!-- ================= PAGE 1 ================= -->
+        <!-- =================================================
+             PAGE 1
+        ================================================= -->
 
         <div id="p1" class="paper">
 
-            <!-- Page 1 Front -->
+
+            <!-- PAGE 1 FRONT -->
 
             <div class="front">
 
@@ -76,7 +234,7 @@
 
                     <div class="basic-title text end">
                         I hope you love this letters!<br>
-                        For: Skye
+                        For: Anjali
                     </div>
 
                 </div>
@@ -84,7 +242,7 @@
             </div>
 
 
-            <!-- Page 1 Back -->
+            <!-- PAGE 1 BACK -->
 
             <div class="back">
 
@@ -92,7 +250,7 @@
 
                     <div class="paper-background">
 
-                        <div class="text text-p1">
+                        <div class="text text-p1 letter-reveal">
 
                             I wrote this letter for you cause I wanna remind you that you're
                             the best girl and beautiful person. I've never met someone like u
@@ -115,11 +273,14 @@
 
 
 
-        <!-- ================= PAGE 2 ================= -->
+        <!-- =================================================
+             PAGE 2
+        ================================================= -->
 
         <div id="p2" class="paper">
 
-            <!-- Page 2 Front - PHOTO ALBUM -->
+
+            <!-- PAGE 2 FRONT -->
 
             <div class="front">
 
@@ -144,7 +305,7 @@
 
 
                     <div class="basic-title text end">
-                        My girl, Skye &lt;3 *
+                        My girl, Anjali &lt;3 *
                     </div>
 
                 </div>
@@ -152,7 +313,7 @@
             </div>
 
 
-            <!-- Page 2 Back - LETTER PART 1 -->
+            <!-- PAGE 2 BACK -->
 
             <div class="back">
 
@@ -160,7 +321,7 @@
 
                     <div class="paper-background">
 
-                        <div class="text text-p1">
+                        <div class="text text-p1 letter-reveal">
 
                             I don't know if you realize how special you are to me.
                             It's not just your smile or your beautiful eyes, but every little thing about you that makes
@@ -185,11 +346,14 @@
 
 
 
-        <!-- ================= PAGE 3 ================= -->
+        <!-- =================================================
+             PAGE 3
+        ================================================= -->
 
         <div id="p3" class="paper">
 
-            <!-- Page 3 Front - LETTER PART 2 -->
+
+            <!-- PAGE 3 FRONT -->
 
             <div class="front">
 
@@ -197,7 +361,7 @@
 
                     <div class="paper-background">
 
-                        <div class="text text-p1">
+                        <div class="text text-p1 letter-reveal">
 
                             Sometimes, no matter how many words I write, they still won't be enough to explain how much
                             you mean to me.
@@ -221,11 +385,53 @@
             </div>
 
 
-            <!-- Page 3 Back -->
+            <!-- =================================================
+                 PAGE 3 BACK / LAST PAGE
+            ================================================= -->
 
             <div class="back">
 
                 <div id="b3" class="back-content">
+
+                    <div class="paper-background">
+
+                        <div class="text text-p1">
+
+                            <div class="letter-reveal">
+
+                                I don't know if I'll ever find the perfect words
+                                to explain how much you mean to me.
+                                But I hope whenever you read these letters,
+                                you remember that you are truly special to me.
+                                Thank you for every smile,
+                                every conversation,
+                                and every little memory
+                                that you've given me.
+                                If I had to choose you all over again,
+                                I'd still choose you.
+
+                                <i>Every single time. ❤️</i>
+
+                            </div>
+
+
+                            <!-- LOVE ENDING -->
+
+                            <div id="love-ending" class="love-ending">
+                                I love you, Anjali ❤️
+                            </div>
+
+
+                            <!-- HEART -->
+
+                            <div id="last-heart" class="last-heart">
+                                ♥
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -235,77 +441,363 @@
     </div>
 
 
-    <!-- Next Button -->
+
+    <!-- NEXT BUTTON -->
 
     <button id="next-btn" type="button" aria-label="Next page" title="Next page">
     </button>
 
 
 
-    <!-- ================= MUSIC SCRIPT ================= -->
+    <!-- =====================================================
+         SCRIPT
+    ===================================================== -->
 
     <script>
 
-        const music = document.getElementById("bg-music");
-        const musicBtn = document.getElementById("music-btn");
+        /* =====================================================
+           MUSIC
+        ===================================================== */
 
-        let started = false;
+        const music =
+            document.getElementById("bg-music");
+
+        const musicBtn =
+            document.getElementById("music-btn");
+
+        let musicStarted = false;
 
 
-        // Start music on ANY first tap/click
         function startMusic() {
 
-            if (started) return;
+            if (musicStarted) return;
+
+            music.volume = 0;
 
             music.play()
                 .then(() => {
 
-                    started = true;
+                    musicStarted = true;
+
                     musicBtn.textContent = "🔊";
 
+
+                    /* Soft fade-in */
+
+                    let volume = 0;
+
+                    const fade = setInterval(() => {
+
+                        volume += 0.03;
+
+                        if (volume >= 0.65) {
+
+                            volume = 0.65;
+
+                            clearInterval(fade);
+
+                        }
+
+                        music.volume = volume;
+
+                    }, 100);
+
                 })
-                .catch(() => {
-                    // Browser blocked playback
-                });
+                .catch(() => { });
+
         }
 
 
-        // Desktop click
-        document.addEventListener("click", startMusic, {
-            once: true
-        });
+        /* ANY FIRST CLICK */
+
+        document.addEventListener(
+            "click",
+            startMusic,
+            { once: true }
+        );
 
 
-        // Mobile touch
-        document.addEventListener("touchstart", startMusic, {
-            once: true
-        });
+        /* ANY FIRST TOUCH */
+
+        document.addEventListener(
+            "touchstart",
+            startMusic,
+            { once: true }
+        );
 
 
-        // Music button Play / Pause
-        musicBtn.addEventListener("click", function (event) {
+        /* MUSIC BUTTON */
 
-            event.stopPropagation();
+        musicBtn.addEventListener(
+            "click",
+            function (event) {
 
-            if (music.paused) {
+                event.stopPropagation();
 
-                music.play();
-                musicBtn.textContent = "🔊";
-                started = true;
+                if (music.paused) {
 
-            } else {
+                    music.play();
 
-                music.pause();
-                musicBtn.textContent = "🎵";
+                    musicBtn.textContent = "🔊";
+
+                    musicStarted = true;
+
+                } else {
+
+                    music.pause();
+
+                    musicBtn.textContent = "🎵";
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================================
+           PAGE FLIP SOUND
+        ===================================================== */
+
+        const pageSound =
+            document.getElementById("page-sound");
+
+
+        function playPageSound() {
+
+            pageSound.currentTime = 0;
+
+            pageSound.volume = 0.35;
+
+            pageSound.play().catch(() => { });
+
+        }
+
+
+        /*
+         * Detect clicks on Next / Previous buttons.
+         * Your existing script.js still handles the
+         * actual page flipping.
+         */
+
+        document
+            .getElementById("next-btn")
+            .addEventListener("click", () => {
+
+                playPageSound();
+
+            });
+
+
+        document
+            .getElementById("prev-btn")
+            .addEventListener("click", () => {
+
+                playPageSound();
+
+            });
+
+
+
+        /* =====================================================
+           LETTER REVEAL
+        ===================================================== */
+
+        const letters =
+            document.querySelectorAll(".letter-reveal");
+
+
+        function revealLetter(element) {
+
+            element.classList.add("show");
+
+        }
+
+
+        /* Initial letter */
+
+        setTimeout(() => {
+
+            if (letters[0]) {
+                revealLetter(letters[0]);
+            }
+
+        }, 500);
+
+
+        /*
+         * When pages are clicked,
+         * reveal any hidden letter on them.
+         */
+
+        document
+            .getElementById("book")
+            .addEventListener("click", function () {
+
+                letters.forEach(letter => {
+
+                    const rect =
+                        letter.getBoundingClientRect();
+
+                    if (
+                        rect.top < window.innerHeight &&
+                        rect.bottom > 0
+                    ) {
+
+                        revealLetter(letter);
+
+                    }
+
+                });
+
+            });
+
+
+
+        /* =====================================================
+           LAST PAGE ENDING
+        ===================================================== */
+
+        const loveEnding =
+            document.getElementById("love-ending");
+
+        const lastHeart =
+            document.getElementById("last-heart");
+
+
+        let endingStarted = false;
+
+
+        function startLastPageEnding() {
+
+            if (endingStarted) return;
+
+            endingStarted = true;
+
+
+            /*
+             * Wait for the final page to settle,
+             * then show "I love you".
+             */
+
+            setTimeout(() => {
+
+                loveEnding.classList.add("show");
+
+
+                /*
+                 * Wait another 3 seconds,
+                 * then start glowing hearts.
+                 */
+
+                setTimeout(() => {
+
+                    lastHeart.classList.add("pulse");
+
+                    createEndingHearts();
+
+                }, 3000);
+
+            }, 1200);
+
+        }
+
+
+
+        /* Detect final page visibility */
+
+        const observer =
+            new MutationObserver(() => {
+
+                const page3 =
+                    document.getElementById("p3");
+
+                if (!page3) return;
+
+
+                const style =
+                    window.getComputedStyle(page3);
+
+
+                /*
+                 * If page 3 is currently visible,
+                 * trigger ending.
+                 */
+
+                if (
+                    style.display !== "none" &&
+                    page3.style.zIndex >= 3
+                ) {
+
+                    startLastPageEnding();
+
+                }
+
+            });
+
+
+        observer.observe(
+            document.getElementById("book"),
+            {
+                attributes: true,
+                subtree: true
+            }
+        );
+
+
+
+        /* =====================================================
+           GLOWING HEARTS
+        ===================================================== */
+
+        function createEndingHearts() {
+
+            for (let i = 0; i < 12; i++) {
+
+                setTimeout(() => {
+
+                    const heart =
+                        document.createElement("div");
+
+                    heart.className =
+                        "ending-heart";
+
+                    heart.textContent =
+                        Math.random() > 0.5
+                            ? "♥"
+                            : "♡";
+
+                    heart.style.left =
+                        Math.random() * 100 + "vw";
+
+                    heart.style.fontSize =
+                        (12 + Math.random() * 12) + "px";
+
+                    heart.style.animationDuration =
+                        (3 + Math.random() * 2) + "s";
+
+                    document.body.appendChild(heart);
+
+
+                    setTimeout(() => {
+
+                        heart.remove();
+
+                    }, 5000);
+
+                }, i * 180);
 
             }
 
-        });
+        }
 
     </script>
 
 
-    <!-- Existing JavaScript -->
+
+    <!-- =====================================================
+         YOUR ORIGINAL SCRIPT
+    ===================================================== -->
 
     <script type="module" src="script.js"></script>
 
